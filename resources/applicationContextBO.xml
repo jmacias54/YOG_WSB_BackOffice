@@ -10,6 +10,8 @@
 	<context:annotation-config/>
 	
 	<bean id="backOfficeCallWS" class="mx.com.amx.wsb.yog.backoffice.ws.BackOfficeCallWS"></bean> 
+	<bean id="eventoCallWS" class="mx.com.amx.wsb.yog.backoffice.ws.EventoCallWS"></bean> 
+	
 	
 	<bean id="backOfficeBO" class="mx.com.amx.wsb.yog.backoffice.bo.BackOfficeBO"></bean> 
 	

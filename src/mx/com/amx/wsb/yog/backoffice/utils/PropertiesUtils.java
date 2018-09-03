@@ -44,6 +44,7 @@ public class PropertiesUtils {
 			parametrosDTO.setUrl(propsServer.getProperty(ambiente+".wsd.url"));
 			parametrosDTO.setDominio(propsServer.getProperty(ambiente+".dominio"));
 			parametrosDTO.setBackofficeController(propsServer.getProperty("controller.backoffice"));
+			parametrosDTO.setEventoController(propsServer.getProperty("controller.evento"));
 			
 						
 		} catch (Exception ex) {

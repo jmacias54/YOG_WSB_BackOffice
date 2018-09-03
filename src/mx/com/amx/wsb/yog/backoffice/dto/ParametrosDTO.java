@@ -9,6 +9,7 @@ public class ParametrosDTO implements Serializable {
 	private String dominio;
 	private String ambiente;
 	private String url;
+	private String eventoController;
 
 	private String backofficeController;
 
@@ -44,10 +45,18 @@ public class ParametrosDTO implements Serializable {
 		this.backofficeController = backofficeController;
 	}
 
+	public String getEventoController() {
+		return eventoController;
+	}
+
+	public void setEventoController(String eventoController) {
+		this.eventoController = eventoController;
+	}
+
 	@Override
 	public String toString() {
-		return "ParametrosDTO [dominio=" + dominio + ", ambiente=" + ambiente + ", url=" + url
-				+ ", backofficeController=" + backofficeController + "]";
+		return "ParametrosDTO [dominio=" + dominio + ", ambiente=" + ambiente + ", url=" + url + ", eventoController="
+				+ eventoController + ", backofficeController=" + backofficeController + "]";
 	}
 
 }

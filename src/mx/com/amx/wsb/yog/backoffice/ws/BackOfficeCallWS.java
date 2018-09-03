@@ -171,6 +171,41 @@ public class BackOfficeCallWS  {
 	
 	
 	
+	
+	
+	
+	/**
+	 * Metodo que llamaba al WS de Datos para obtener todas las secciones 
+	 * @return CategoriaDTO[]
+	 * @throws CallWSException
+	 * */
+	public Nota[] _getNotasByDeporte(String idDeporte, String pagina, String resultadosPorPagina) throws CallWSException
+	{		
+		LOG.debug("   ---  _getNotasByDeporte en [ BackOfficeCallWS ]  --- ");
+		LOG.debug("idDeporte   [ BackOfficeCallWS ] : "+idDeporte);
+		LOG.debug("pagina   [ BackOfficeCallWS ] : "+pagina);
+		LOG.debug("resultadosPorPagina   [ BackOfficeCallWS ] : "+resultadosPorPagina);
+		
+		try {			
+			ParametrosDTO parametrosDTO = PropertiesUtils.obtenerPropiedades();	
+			String URL_WS=parametrosDTO.getUrl()+parametrosDTO.getBackofficeController()+"getNotasByDeporte";			
+			
+			MultiValueMap<String, Object> parts;
+			parts = new LinkedMultiValueMap<String, Object>();
+			parts.add("idDeporte", idDeporte);
+			parts.add("pagina", pagina);
+			parts.add("resultadosPorPagina", resultadosPorPagina);			
+			LOG.debug("URL_WS   [ BackOfficeCallWS ] : "+URL_WS);								
+			return restTemplate.postForObject(URL_WS, parts, Nota[].class);			
+		} catch(Exception e) {
+			LOG.error("Exception en _getNotasByDeporte   [ BackOfficeCallWS ] : ",e);
+			throw new CallWSException(e.getMessage());
+		}
+	}
+	
+	
+	
+	
 	/**
 	 * Metodo que llamaba al WS de Datos para obtener todas las secciones 
 	 * @return CategoriaDTO[]
@@ -194,6 +229,29 @@ public class BackOfficeCallWS  {
 		}
 	}
 	
+	
+	/**
+	 * Metodo que llamaba al WS de Datos para obtener todas las secciones 
+	 * @return CategoriaDTO[]
+	 * @throws CallWSException
+	 * */
+	public Integer _getTotalNotasByDeporte(String idDeporte) throws CallWSException
+	{		
+		LOG.debug("   ---  _getTotalNotasByDeporte en [ BackOfficeCallWS ]  --- ");
+		LOG.debug("idDeporte   [ BackOfficeCallWS ] : "+idDeporte);
+		
+		try {			
+			ParametrosDTO parametrosDTO = PropertiesUtils.obtenerPropiedades();	
+			String URL_WS=parametrosDTO.getUrl()+parametrosDTO.getBackofficeController()+ "getTotalNotasByDeporte";
+			HttpEntity<String> entity = new HttpEntity<String>(idDeporte);
+
+			LOG.debug("URL_WS   [ BackOfficeCallWS ] : "+URL_WS);								
+			return restTemplate.postForObject(URL_WS, entity, Integer.class);			
+		} catch(Exception e) {
+			LOG.error("Exception en _getTotalNotasByDeporte   [ BackOfficeCallWS ] : ",e);
+			throw new CallWSException(e.getMessage());
+		}
+	}
 	
 	/**
 	 * Metodo 

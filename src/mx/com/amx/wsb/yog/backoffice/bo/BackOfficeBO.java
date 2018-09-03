@@ -99,7 +99,22 @@ private static Logger LOG = Logger.getLogger(BackOfficeBO.class);
 	}
 	
 	
-	
+	/**
+	 * Metodo
+	 * @return List<CategoriaDTO>
+	 * @throws BOException
+	 * */
+	public Integer getTotalNotasByDeporte(String fcIdDeporte) throws BOException 
+	{
+		LOG.debug("Inicia getTotalNotasByDeporte [BO]");
+		LOG.debug("fcIdDeporte: "+fcIdDeporte);
+		try {							
+			return backOfficeCallWS._getTotalNotasByDeporte(fcIdDeporte);			
+		}catch (Exception e) {
+			LOG.error("Exception en getTotalNotasByDeporte   :",e);
+			throw new BOException(e.getMessage());
+		}		
+	}
 	
 	
 	
@@ -118,6 +133,46 @@ private static Logger LOG = Logger.getLogger(BackOfficeBO.class);
 			return Arrays.asList(arrayNota);
 		} catch (Exception e) {
 			LOG.error("Exception en getNotasByCategoria:",e);
+			throw new BOException(e.getMessage());
+		}		
+	}
+	
+	
+	/**
+	 * Metodo
+	 * @return List<CategoriaDTO>
+	 * @throws BOException
+	 * 
+	 * */
+	public List<Nota> getTotalNotasByDeporte(String fcIdDeporte, int pagina) throws BOException 
+	{
+		LOG.debug("Inicia getTotalNotasByDeporte en BackOfficeBO");
+		LOG.debug("pagina: "+pagina);
+		try {							
+			Nota[] arrayNota = backOfficeCallWS._getNotasByDeporte(fcIdDeporte, String.valueOf(pagina), "10");
+			return Arrays.asList(arrayNota);
+		} catch (Exception e) {
+			LOG.error("Exception en getTotalNotasByDeporte:",e);
+			throw new BOException(e.getMessage());
+		}		
+	}
+	
+	
+	/**
+	 * Metodo
+	 * @return List<CategoriaDTO>
+	 * @throws BOException
+	 * 
+	 * */
+	public List<Nota> getNotasByDeporte(String fcIdDeporte, int pagina) throws BOException 
+	{
+		LOG.debug("Inicia getNotasByDeporte en BackOfficeBO");
+		LOG.debug("pagina: "+pagina);
+		try {							
+			Nota[] arrayNota = backOfficeCallWS._getNotasByDeporte(fcIdDeporte, String.valueOf(pagina), "10");
+			return Arrays.asList(arrayNota);
+		} catch (Exception e) {
+			LOG.error("Exception en getNotasByDeporte:",e);
 			throw new BOException(e.getMessage());
 		}		
 	}

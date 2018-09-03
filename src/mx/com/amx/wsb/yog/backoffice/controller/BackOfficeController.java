@@ -100,6 +100,37 @@ public class BackOfficeController {
 	 * @return List<Nota>
 	 * @throws ControllerException
 	 * */
+	@RequestMapping( value = "getNotasByDeporte/{fcIdDeporte}/{pagina}" , method=RequestMethod.GET , headers="Accept=application/json" )
+	@ResponseBody
+	public  List<Nota> getNotasByDeporte(@PathVariable String fcIdDeporte, @PathVariable Integer pagina, HttpServletResponse  response ) throws ControllerException {
+		LOG.debug(" ====================================================================== ");	
+		LOG.info(" ----   Inicia getNotasByDeporte    [  BackOfficeController  ]  ----  ");
+		LOG.info("fcIdDeporte: "+fcIdDeporte);
+		LOG.info("pagina: "+pagina);
+		LOG.debug(" ====================================================================== ");	
+		
+		try {
+			Integer numeroPaginas = 0;
+			Integer total = 0;
+			if (pagina == 0){
+				total = backOfficeBO.getTotalNotasByDeporte(fcIdDeporte);
+				numeroPaginas = (int)( Math.ceil( (double) total / (double) 10 )   )   ;
+				response.setHeader("total", String.valueOf( numeroPaginas ) );
+				pagina = 1;
+			}	
+			return backOfficeBO.getNotasByDeporte(fcIdDeporte, pagina);
+		}  catch ( Exception e ){
+			LOG.error("Exception getNotasByDeporte   [  BackOfficeController  ] ",e);
+			throw new ControllerException(e.getMessage());
+		}	 			
+	}
+	
+	/**
+	 * Metodo 
+	 * @param idMagazine
+	 * @return List<Nota>
+	 * @throws ControllerException
+	 * */
 	@RequestMapping( value = "/getNotasByFcNombre/{fcNombre}/" , method=RequestMethod.POST , headers="Accept=application/json" )
 	@ResponseBody
 	public  Nota getNotasByFcNombre(@PathVariable String fcNombre) throws ControllerException {
