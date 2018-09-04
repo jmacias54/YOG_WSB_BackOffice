@@ -62,29 +62,29 @@ public class EventoController {
 		
 	}
 	
-	@RequestMapping( value = "/update" , method=RequestMethod.POST , headers="Accept=application/json" )
+	@RequestMapping( value = "/delete" , method=RequestMethod.POST , headers="Accept=application/json" )
 	@ResponseBody
-	public int update(@RequestBody Evento evento) throws RestClientException {
-		LOG.debug("--- update  [ EventoDAO ] ---");
+	public int delete(@RequestBody Evento evento) throws RestClientException {
+		LOG.debug("--- delete  [ EventoDAO ] ---");
 		LOG.debug("--- evento: " + evento.toString());
 		try {						
-			return eventoCallWS.update(evento);
+			return eventoCallWS.delete(evento.getIdEvento());
 		} catch (Exception e ){
-			LOG.error("Exception update  [ EventoController  ] ",e);
+			LOG.error("Exception delete  [ EventoController  ] ",e);
 			throw new RestClientException(e.getMessage());
 		}	 	
 		
 	}
 	
-	@RequestMapping( value = "/delete" , method=RequestMethod.POST , headers="Accept=application/json" )
+	@RequestMapping( value = "/update" , method=RequestMethod.POST , headers="Accept=application/json" )
 	@ResponseBody
-	public int delete(@RequestBody Evento evento ) throws RestClientException {
-		LOG.debug("--- delete  [ EventoDAO ] ---");
+	public int update(@RequestBody Evento evento ) throws RestClientException {
+		LOG.debug("--- update  [ EventoDAO ] ---");
 		LOG.debug("--- idEvento: " + evento.getIdEvento());
 		try {						
-			return eventoCallWS.delete( evento.getIdEvento());
+			return eventoCallWS.update( evento);
 		} catch (Exception e ){
-			LOG.error("Exception delete  [ EventoController  ] ",e);
+			LOG.error("Exception update  [ EventoController  ] ",e);
 			throw new RestClientException(e.getMessage());
 		}	 	
 		
