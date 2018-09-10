@@ -220,7 +220,22 @@ private static Logger LOG = Logger.getLogger(BackOfficeBO.class);
 	}
 	
 	
-	
+	public List <Nota> _notasPublicadas(String idMagazine) throws BOException 
+	{
+		LOG.debug("Inicia getNotesPublished en BackOfficeBO");
+		LOG.debug("idMagazine: "+idMagazine);
+		try {			
+			List<Nota> listNotaResponse = new ArrayList<Nota>();
+			
+				listNotaResponse = backOfficeCallWS._getNotasPublicadas(idMagazine);
+				
+			LOG.debug("size: "+listNotaResponse.size());
+			return listNotaResponse;
+		} catch (Exception e) {
+			LOG.error("Exception en getNotesPublished:",e);
+			throw new BOException(e.getMessage());
+		}		
+	}
 
 	/**
 	 * Metodo

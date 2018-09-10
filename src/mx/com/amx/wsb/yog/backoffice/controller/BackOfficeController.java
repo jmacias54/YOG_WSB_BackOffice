@@ -203,7 +203,7 @@ public class BackOfficeController {
 		
 		
 		try {
-			return backOfficeBO.getNotesPublished(idMagazine);
+			return backOfficeBO._notasPublicadas(idMagazine);
 		}  catch ( Exception e ){
 			LOG.error("Exception getNotesPublished   [  BackOfficeController  ] ",e);
 			throw new ControllerException(e.getMessage());

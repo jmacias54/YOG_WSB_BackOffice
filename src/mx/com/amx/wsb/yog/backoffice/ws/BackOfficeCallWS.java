@@ -3,6 +3,8 @@
  */
 package mx.com.amx.wsb.yog.backoffice.ws;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
@@ -114,6 +116,22 @@ public class BackOfficeCallWS  {
 		}
 	}
 	
+	
+	public List<Nota> _getNotasPublicadas(String idMagazine) throws CallWSException
+	{		
+		LOG.debug("   ---  _getNotasPublicadas en [ BackOfficeCallWS ]  --- ");
+		LOG.debug("idMagazine   [ BackOfficeCallWS ] : "+idMagazine);		
+		try {			
+			ParametrosDTO parametrosDTO = PropertiesUtils.obtenerPropiedades();	
+			String URL_WS=parametrosDTO.getUrl()+parametrosDTO.getBackofficeController()+"getNotasPublicadas";			
+			LOG.debug("URL_WS   [ BackOfficeCallWS ] : "+URL_WS);			
+			HttpEntity<String> entity = new HttpEntity<String>(idMagazine);			
+			return Arrays.asList(restTemplate.postForObject(URL_WS, entity, Nota[].class));		
+		} catch(Exception e) {
+			LOG.error("Exception en _getNotasPublicadas   [ BackOfficeCallWS ] : ",e);
+			throw new CallWSException(e.getMessage());
+		}
+	}
 	
 	
 	/**
